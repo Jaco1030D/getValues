@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCalculateValue } from '../../hooks/useCalculateValue';
 
 const File = ({file}) => {
@@ -19,7 +19,9 @@ const File = ({file}) => {
         setValue(valuePDF)
 
       }).catch(err => {
+
         setNumWords(0)
+        
       })
     } else {
       getNumWordsDOCX(file).then(res => {
@@ -35,7 +37,10 @@ const File = ({file}) => {
       })
     }
 
-    
+    // useEffect(() => {
+    //   const response = getNumWordsPDF(file)
+    //   setNumWords(response)
+    // },[])
 
   return (
     <>
