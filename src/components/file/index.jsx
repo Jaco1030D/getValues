@@ -19,9 +19,8 @@ const File = ({file}) => {
         setValue(valuePDF)
 
       }).catch(err => {
-
-        setNumWords(0)
         
+        setNumWords(0)
       })
     } else {
       getNumWordsDOCX(file).then(res => {
