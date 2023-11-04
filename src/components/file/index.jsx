@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useCalculateValue } from '../../hooks/useCalculateValue';
 
 const File = ({file}) => {
@@ -39,7 +39,11 @@ const File = ({file}) => {
 
   return (
     <>
-    <td>{name}</td>
+    <td>
+      <p>
+      {name}
+      </p>
+    </td>
     <td>{extension}</td>
     <td>{numWords}</td>
     <td>R${value}</td>

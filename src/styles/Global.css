@@ -8,10 +8,13 @@
 }
 body {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #eeeff0;
+}
+.App {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .input.file {
     border: 3px dashed #eaedf0;
@@ -42,7 +45,9 @@ tr {
     cursor: pointer;
     background-color: #fff;
 }
-
+p, td {
+    word-break: break-all   
+}
 th,
 td {
     padding: 12px;
@@ -74,8 +79,15 @@ h1 {
     justify-content: center;
 }
 
-@media only screen and (max-width: 768px) {
-    table {
+@media only screen and (max-width: 600px) {
+    table, .input.file {
         width: 90%;
+    }
+    .App {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 }

@@ -40,7 +40,7 @@ function Home() {
   console.log(files);
   return (
     <div className="App">
-      <div className="input file" onDragOver={(e) => e.preventDefault()} onDrop={handleDrop}>
+        <div className="input file" onDragOver={(e) => e.preventDefault()} onDrop={handleDrop}>
             <label htmlFor='file'>
               <AiOutlineCloudUpload id='icon' />
               Adicione seus arquivos:
