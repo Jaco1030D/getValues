@@ -9,12 +9,15 @@
 body {
     min-height: 100vh;
     background-color: #eeeff0;
+    display: flex;
+    justify-content: center;
 }
 .App {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    margin: 50px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
 }
 .input.file {
     border: 3px dashed #eaedf0;
@@ -25,8 +28,7 @@ body {
     justify-content: center;
     height: 200px;
     border-radius: 15px;
-    width: 600px;
-    margin-bottom: 10px;
+    width: 700px;
 }
 .input.file input {
     display: none;
@@ -36,16 +38,24 @@ body {
 }
 table {
     border-collapse: collapse;
-    width: 600px;
+    width: 700px;
     border: 1px solid #bdc3c7;
 }
-
+.inputs-select {
+    display: flex;
+    justify-content: space-between;
+}
+.select-input {
+    width: 49%;
+    height: 50px;
+    border-radius: 15px;
+}
 tr {
     transition: all .2s ease-in;
     cursor: pointer;
     background-color: #fff;
 }
-p, td {
+tr p {
     word-break: break-all   
 }
 th,
@@ -56,7 +66,7 @@ td {
 }
 
 #header {
-    background-color: #16a085;
+    background-color: #C8982A;
     color: #fff;
 }
 
@@ -79,12 +89,130 @@ h1 {
     justify-content: center;
 }
 
-@media only screen and (max-width: 600px) {
-    table, .input.file {
-        width: 90%;
+.select-btn{
+    display: flex;
+    height: 50px;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.select-btn .btn-text{
+    font-size: 17px;
+    font-weight: 400;
+    color: #333;
+}
+.select-btn .arrow-dwn{
+    display: flex;
+    height: 21px;
+    width: 21px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 50%;
+    background: #6e93f7;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+.list-items, option{
+    position: absolute;
+    display: flex;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+.select-btn.open ~ .list-items{
+    display: grid;
+    position: absolute;
+    max-width: 700px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    left: 0;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.list-items .item, option{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 0 5px;
+    border-radius: 8px;
+    width: 180px;
+}
+
+.item .item-text{
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+.item .checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: 1.5px solid #c0c0c0;
+    transition: all 0.3s ease-in-out;
+}
+.item.checked .checkbox{
+    background-color: #C8982A;
+    border-color: #C8982A;
+}
+.checkbox .check-icon{
+    color: #fff;
+    font-size: 11px;
+    transform: scale(0);
+    transition: all 0.2s ease-in-out;
+}
+.item.checked .check-icon{
+    transform: scale(1);
+}
+select {
+    appearance: none;
+}
+
+@media only screen and (max-width: 700px) {
+    table, .input.file, .inputs-select {
+        width: 500px;
     }
     .App {
-        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    table, .input.file, .inputs-select {
+        width: 300px;
+    }
+    .App {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    table, .input.file, .inputs-select {
+        width: 200px;
+    }
+    .App {
         display: flex;
         flex-direction: column;
         align-items: center;

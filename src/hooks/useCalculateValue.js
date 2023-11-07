@@ -2,10 +2,12 @@ import { pdfjs } from 'react-pdf';
 import { DOMParser } from "@xmldom/xmldom";
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry';
 import PizZip from 'pizzip';
+import { useState } from 'react';
 
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 export const useCalculateValue = () => {
+  const [value, setValue] = useState([]);
 
     const getTextFromPDF = async (FilePDF) => {
         return new Promise((resolve, reject) => {
@@ -110,10 +112,41 @@ export const useCalculateValue = () => {
 
       return numWords
     }
-    const calculateValue = (numWords) => {
-      let value = 0
+    const calculateValues = (numWords, infos) => {
+      const value = []
+
+      console.log(numWords);
+
+      console.log(infos);
+      const languagesTarget = infos.translation
+
+      console.log(languagesTarget);
+
+      const originLanguage = infos.origin
+
+      languagesTarget.forEach(element => {
+        const valueTranslation = calculateValue(originLanguage, element)
+        value.push(valueTranslation)
+      });
 
       return value
+    }
+
+    const calculateValue = (origin, translation) => {
+      return 50
+    }
+
+    const getNumWordsFile = (file) => {
+
+    }
+    const getExtension = (file) => {
+      const name = file.name
+
+      const fileNameParts = name.split('.');
+
+      const extension = fileNameParts[fileNameParts.length - 1]
+
+      return extension
     }
     return {
         getCountWord,
@@ -121,6 +154,7 @@ export const useCalculateValue = () => {
         getNumWordsPDF,
         getTextFromDocx,
         getNumWordsDOCX,
-        calculateValue
+        calculateValues,
+        getExtension
     }
 }

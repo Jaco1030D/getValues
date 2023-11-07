@@ -1,56 +1,82 @@
 import React, { useEffect, useState } from 'react'
 import { useCalculateValue } from '../../hooks/useCalculateValue';
 
-const File = ({file}) => {
-    const {getNumWordsPDF, getNumWordsDOCX, calculateValue } = useCalculateValue()
+const File = ({file, inputsValue}) => {
+    const {getNumWordsPDF, getNumWordsDOCX, calculateValues, getExtension } = useCalculateValue()
     const [numWords, setNumWords] = useState('Calculando...')
-    const [value, setValue] = useState(0)
-    const name = file.name
-    const fileNameParts = name.split('.');
-    const extension = fileNameParts[fileNameParts.length - 1]
+    const [value, setValue] = useState([])
+    const extension = getExtension(file)
     
-    if (extension === "pdf") {
-      getNumWordsPDF(file).then(res => {
+    // if (extension === "pdf") {
+    //   getNumWordsPDF(file).then(res => {
       
-        setNumWords(res)
+    //     setNumWords(res)
       
-        const valuePDF = calculateValue(res)
+    //     const valuePDF = calculateValue(res)
 
-        setValue(valuePDF)
+    //     setValue(valuePDF)
 
-      }).catch(err => {
+    //   }).catch(err => {
         
-        setNumWords(0)
-      })
-    } else {
-      getNumWordsDOCX(file).then(res => {
+    //     setNumWords(0)
+    //   })
+    // } else {
+    //   getNumWordsDOCX(file).then(res => {
 
-        setNumWords(res)
+    //     setNumWords(res)
       
-        const valueDOCX = calculateValue(res)
+    //     const valueDOCX = calculateValue(res)
 
-        setValue(valueDOCX)
+    //     setValue(valueDOCX)
 
-      }).catch(err => {
-        setNumWords(0)
-      })
-    }
-
+    //   }).catch(err => {
+    //     setNumWords(0)
+    //   })
+    // }
+    useEffect(() => {
+      if (extension === "pdf") {
+        getNumWordsPDF(file)
+          .then((res) => {
+            setNumWords(res);
+            const value = calculateValues(res, inputsValue);
+            setValue(value);
+          })
+          .catch((err) => {
+            setNumWords(0);
+          });
+      } else {
+        getNumWordsDOCX(file)
+          .then((res) => {
+            setNumWords(res);
+            const value = calculateValues(res, inputsValue);
+            setValue(value);
+          })
+          .catch((err) => {
+            setNumWords(0);
+          });
+      }
+    }, [file, extension, inputsValue]);
+    console.log(value);
     // useEffect(() => {
-    //   const response = getNumWordsPDF(file)
-    //   setNumWords(response)
+    //   const value = calculateValue(numWords, inputsValue)
+    //   setValue(value)
     // },[])
-
   return (
     <>
-    <td>
-      <p>
-      {name}
-      </p>
-    </td>
-    <td>{extension}</td>
-    <td>{numWords}</td>
-    <td>R${value}</td>
+    {inputsValue.translation && inputsValue.translation.map((item, index) => (
+      <tr key={index}> 
+      <td>
+        <p>
+        {file.name}
+        </p>
+      </td>
+      <td>{extension}</td>
+      <td>{numWords}</td>
+      <td>{item}</td>
+      <td>R${value[index]}</td>
+      </tr>
+    ))}
+    
     </>
   )
 }
