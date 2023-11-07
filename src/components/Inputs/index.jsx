@@ -1,4 +1,5 @@
 import SelectInput from '../Select';
+import SelectInputMultiple from '../selectMultiple';
 
 const languages = [
   { value: "pt", label: "Português" },
@@ -28,7 +29,7 @@ const Inputs = ({inputsValue, update}) => {
   return (
     <div className='inputs-select'>
         <SelectInput languages={languages} id={'origin'} title='Origem' name='origin' values={inputsValue.origin} update={update} oneElement={true}/>
-        <SelectInput languages={languages} id={'translation'} title='Para traduzir' name='translation' update={update}/>
+        <SelectInputMultiple languages={languages} id={'translation'} title='Para traduzir' name='translation' update={update}/>
     </div>
   )
 }

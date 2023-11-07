@@ -12,6 +12,8 @@ function Home() {
   const [files, setFiles] = useState({})
   const [inputsValue, setInputsValue] = useState(languages)
 
+  console.log(inputsValue);
+
   const updateFieldHandler = (key, value) => {
     setInputsValue((prev) => {
       return { ...prev, [key]: value };

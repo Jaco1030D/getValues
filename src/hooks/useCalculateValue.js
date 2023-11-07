@@ -132,7 +132,7 @@ export const useCalculateValue = () => {
       return value
     }
 
-    const calculateValue = (origin, translation) => {
+    const calculateValue = (origin, translation, numWords) => {
       return 50
     }
 
