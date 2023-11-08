@@ -209,6 +209,12 @@ select {
         align-items: center;
         justify-content: center;
     }
+    td:nth-child(1),
+    th:nth-child(1),
+    td:nth-child(2),
+    th:nth-child(2) {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 300px) {
@@ -221,10 +227,4 @@ select {
         align-items: center;
         justify-content: center;
     }
-}
-td:nth-child(1),
-th:nth-child(1),
-td:nth-child(2),
-th:nth-child(2) {
-    display: none;
 }
