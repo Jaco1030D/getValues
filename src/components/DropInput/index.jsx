@@ -4,13 +4,11 @@ import { AiOutlineCloudUpload } from 'react-icons/ai';
 const DropIntput = ({files, setFiles, inputsValue}) => {
     const [numArchives, setNumArchives] = useState(0)
     const [messageError, setMessageError] = useState()
-    console.log(inputsValue);
     const input = useRef()
     const handleFileChange = (e) => {
         const count = e.target.files.length;
         const files = e.target.files
         setFiles(files)
-        console.log(e.target.files);
         setNumArchives(count);
       }
       const handleDrop = (e) => {

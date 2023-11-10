@@ -6,10 +6,6 @@ const Item = ({name, handleClick, id, oneElement, language, openItem}) => {
 
   const handleItemClick = () => {
     
-    // const elements = document.getElementById(id).querySelectorAll('.checked');
-    // elements.forEach(div => {
-    //     div.classList.remove('checked');
-    // });
     setIsChecked(!isChecked);
 
   };
@@ -17,12 +13,6 @@ const Item = ({name, handleClick, id, oneElement, language, openItem}) => {
   useEffect(() => {
 
     handleClick()
-
-    // if (liRef.current.classList.contains('checked')) {
-    //   setIsChecked(true)
-    // } else {
-    //   setIsChecked(false)
-    // }
 
   },[isChecked])
   return (

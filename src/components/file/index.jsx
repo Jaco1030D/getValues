@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCalculateValue } from '../../hooks/useCalculateValue';
 
-const File = ({file, inputsValue}) => {
+const File = ({file, inputsValue, valueWord, languages}) => {
     const {getNumWordsPDF, getNumWordsDOCX, calculateValues, getExtension } = useCalculateValue()
     const [numWords, setNumWords] = useState('Calculando...')
     const [value, setValue] = useState([])
@@ -38,7 +38,7 @@ const File = ({file, inputsValue}) => {
         getNumWordsPDF(file)
           .then((res) => {
             setNumWords(res);
-            const value = calculateValues(res, inputsValue);
+            const value = calculateValues(res, inputsValue, valueWord, languages);
             setValue(value);
           })
           .catch((err) => {
@@ -48,15 +48,14 @@ const File = ({file, inputsValue}) => {
         getNumWordsDOCX(file)
           .then((res) => {
             setNumWords(res);
-            const value = calculateValues(res, inputsValue);
+            const value = calculateValues(res, inputsValue, valueWord, languages);
             setValue(value);
           })
           .catch((err) => {
             setNumWords(0);
           });
       }
-    }, [file, extension, inputsValue]);
-    console.log(value);
+    }, [file, extension, inputsValue, valueWord, languages]);
     // useEffect(() => {
     //   const value = calculateValue(numWords, inputsValue)
     //   setValue(value)

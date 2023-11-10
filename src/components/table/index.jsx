@@ -1,7 +1,7 @@
 import React from 'react'
 import File from '../file'
 
-const Table = ({ files, inputsValue }) => {
+const Table = ({ files, inputsValue, value, languages }) => {
   return (
     <table>
         <thead>
@@ -15,7 +15,7 @@ const Table = ({ files, inputsValue }) => {
         </thead>
         <tbody>
         {Object.keys(files).map((key, index) => (
-            <File file={files[key]} key={index} inputsValue={inputsValue} />
+            <File file={files[key]} key={index} languages={languages} valueWord={value} inputsValue={inputsValue} />
         ))}
         </tbody>
     </table>

@@ -112,28 +112,25 @@ export const useCalculateValue = () => {
 
       return numWords
     }
-    const calculateValues = (numWords, infos) => {
+    const calculateValues = (numWords, infos, valueWords, languages) => {
       const value = []
 
-      console.log(numWords);
-
-      console.log(infos);
       const languagesTarget = infos.translation
-
-      console.log(languagesTarget);
 
       const originLanguage = infos.origin
 
       languagesTarget.forEach(element => {
-        const valueTranslation = calculateValue(originLanguage, element)
+        const language = languages.filter(value => value.label === element)
+        const valueWord = language[0].value === 0 ? valueWords : language[0].value
+        const valueTranslation = calculateValue(originLanguage, element, numWords, valueWord)
         value.push(valueTranslation)
       });
 
       return value
     }
 
-    const calculateValue = (origin, translation, numWords) => {
-      return 50
+    const calculateValue = (origin, translation, numWords, valueWord) => {
+      return numWords * valueWord
     }
 
     const getNumWordsFile = (file) => {

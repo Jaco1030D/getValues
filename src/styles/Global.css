@@ -92,6 +92,29 @@ h1 {
     justify-content: center;
 }
 
+.value-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    gap: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.value-per-word {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
 .select-btn{
     display: flex;
     height: 50px;
@@ -140,6 +163,7 @@ h1 {
     max-width: 700px;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     left: 0;
+    z-index: 1;
     flex-wrap: wrap;
     gap: 20px;
 }
@@ -198,9 +222,21 @@ select {
         justify-content: center;
     }
 }
+input[type="number"] {
+    -moz-appearance: textfield;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    text-align: right;
+}
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 @media only screen and (max-width: 500px) {
-    table, .input.file, .inputs-select, .list-items {
+    table, .input.file, .inputs-select, .list-items, .value-box {
         width: 300px;
     }
     .App {
@@ -218,8 +254,14 @@ select {
 }
 
 @media only screen and (max-width: 300px) {
-    table, .input.file, .inputs-select, .list-items {
+    table, .input.file, .inputs-select, .list-items, .value-box {
         width: 200px;
+    }
+    .value-per-word {
+        flex-direction: column;
+    }
+    input[type="number"] {
+        text-align: left;
     }
     .App {
         display: flex;
@@ -227,4 +269,13 @@ select {
         align-items: center;
         justify-content: center;
     }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #E5E4E2;
+    border-radius: 6px;
 }

@@ -1,0 +1,19 @@
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    padding: 16px;
+    gap: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+}
