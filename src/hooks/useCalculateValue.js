@@ -2,12 +2,10 @@ import { pdfjs } from 'react-pdf';
 import { DOMParser } from "@xmldom/xmldom";
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry';
 import PizZip from 'pizzip';
-import { useState } from 'react';
 
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 export const useCalculateValue = () => {
-  const [value, setValue] = useState([]);
 
     const getTextFromPDF = async (FilePDF) => {
         return new Promise((resolve, reject) => {
@@ -121,7 +119,7 @@ export const useCalculateValue = () => {
 
       languagesTarget.forEach(element => {
         const language = languages.filter(value => value.label === element)
-        const valueWord = language[0].value === 0 ? valueWords : language[0].value
+        const valueWord = language[0].value == 0 ? valueWords : language[0].value
         const valueTranslation = calculateValue(originLanguage, element, numWords, valueWord)
         value.push(valueTranslation)
       });
