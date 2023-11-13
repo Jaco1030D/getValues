@@ -17,7 +17,7 @@ body {
 }
 
 @media only screen and (max-width: 700px) {
-    table, .input.file, .inputs-select, .list-items {
+    .table, .input.file, .inputs-select, .list-items {
         width: 500px;
     }
     .App {
@@ -28,7 +28,7 @@ body {
     }
 }
 @media only screen and (max-width: 500px) {
-    table, .input.file, .inputs-select, .list-items, .value-box {
+    .table, .input.file, .inputs-select, .list-items, .value-box {
         width: 300px;
     }
     .value-per-word {
@@ -52,7 +52,7 @@ body {
 }
 
 @media only screen and (max-width: 300px) {
-    table, .input.file, .inputs-select, .list-items, .value-box {
+    .table, .input.file, .inputs-select, .list-items, .value-box {
         width: 200px;
     }
     .App {

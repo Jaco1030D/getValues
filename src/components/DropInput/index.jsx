@@ -36,7 +36,7 @@ const DropIntput = ({files, setFiles, inputsValue}) => {
         }
       }
   return (
-    <div className="input file" onDragOver={(e) => e.preventDefault()} onDrop={handleDrop}>
+    <div className="input file fileDrop" onDragOver={(e) => e.preventDefault()} onDrop={handleDrop}>
         <label htmlFor='file'>
         <AiOutlineCloudUpload id='icon' />
         Adicione seus arquivos:

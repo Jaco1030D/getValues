@@ -4,7 +4,7 @@ import './styles.css';
 
 const Table = ({ files, inputsValue, value, languages }) => {
   return (
-    <table>
+    <table className='table'>
         <thead>
         <tr id="header">
             <th>Nome</th>
