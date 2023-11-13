@@ -145,7 +145,7 @@ export const useCalculateValue = () => {
         const language = languages.filter(value => value.label === element)
         const valueWord = language[0].value == 0 ? valueWords : language[0].value
         const valueTranslation = calculateValue(originLanguage, element, numWords, valueWord)
-        value.push(valueTranslation)
+        value.push(valueTranslation.toFixed(2))
       });
 
       return value
