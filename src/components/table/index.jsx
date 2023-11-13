@@ -1,5 +1,6 @@
 import React from 'react'
 import File from '../file'
+import './styles.css';
 
 const Table = ({ files, inputsValue, value, languages }) => {
   return (
@@ -9,6 +10,7 @@ const Table = ({ files, inputsValue, value, languages }) => {
             <th>Nome</th>
             <th>Tipo</th>
             <th>Palavras</th>
+            <th>Paginas</th>
             <th>Destino</th>
             <th>valor</th>
         </tr>

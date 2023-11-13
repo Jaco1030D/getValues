@@ -21,8 +21,10 @@ export const useCalculateValue = () => {
                 const pdf = await pdfjs.getDocument(typedArray).promise;
 
                 let fullText = '';
+
+                const numPages = pdf.numPages
         
-                for (let i = 1; i <= pdf.numPages; i++) {
+                for (let i = 1; i <= numPages; i++) {
 
                   const page = await pdf.getPage(i);
 
@@ -32,7 +34,7 @@ export const useCalculateValue = () => {
 
                 }
         
-                resolve(fullText);
+                resolve({fullText, numPages});
 
               } catch (error) {
 
@@ -63,6 +65,23 @@ export const useCalculateValue = () => {
           try {
             const zip = new PizZip(e.target.result);
             const xml = str2xml(zip.files["word/document.xml"].asText());
+            console.log(xml);
+            const numPages = xml.getElementsByTagName('w:lastRenderedPageBreak').length + 1;
+
+            // console.log(`Número de páginas: ${numeroPaginas}`);
+            // var filename = "file.xml";
+            // var pom = document.createElement('a');
+            // var bb = new Blob([xml], {type: 'text/plain'});
+
+            // pom.setAttribute('href', window.URL.createObjectURL(bb));
+            // pom.setAttribute('download', filename);
+
+            // pom.dataset.downloadurl = ['text/plain', pom.download, pom.href].join(':');
+            // pom.draggable = true; 
+            // pom.classList.add('dragout');
+
+            // pom.click();
+
             const paragraphsXml = xml.getElementsByTagName("w:p");
             const paragraphs = [];
             for (let i = 0, len = paragraphsXml.length; i < len; i++) {
@@ -78,7 +97,10 @@ export const useCalculateValue = () => {
                 paragraphs.push(fullText);
               }
             }
-            resolve(paragraphs.join(' '))
+
+            const fullText = paragraphs.join(' ')
+
+            resolve({fullText, numPages})
           } catch (error) {
             reject(error)
           }
@@ -97,18 +119,20 @@ export const useCalculateValue = () => {
     }    
 
     const getNumWordsDOCX = async (FileDOCX) => {
-      const res = await getTextFromDocx(FileDOCX)
+      const {fullText, numPages} = await getTextFromDocx(FileDOCX)
 
-      const numWords = await getCountWord(res)
+      const numWords = await getCountWord(fullText)
 
-      return numWords
+      return {numWords, numPages}
     }
     const getNumWordsPDF = async (FilePDF) => {
-      const res = await getTextFromPDF(FilePDF)
+      const {fullText, numPages} = await getTextFromPDF(FilePDF)
 
-      const numWords = await getCountWord(res)
+      console.log(numPages);
 
-      return numWords
+      const numWords = await getCountWord(fullText)
+
+      return {numWords, numPages}
     }
     const calculateValues = (numWords, infos, valueWords, languages) => {
       const value = []

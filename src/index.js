@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/Global.css';
 import Home from './templates/Home';
+import DocxReader from './templates/Teste';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

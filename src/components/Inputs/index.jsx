@@ -1,5 +1,7 @@
 import SelectInput from '../Select';
 import SelectInputMultiple from '../selectMultiple';
+import './styles.css';
+
 
 const Inputs = ({inputsValue, update, languages}) => {
   return (

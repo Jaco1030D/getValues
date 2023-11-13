@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import './styles.css';
+
 
 const Item = ({ name, handleClick, id, oneElement, language, openItem, isSelected, handleItemClick }) => {
   return (

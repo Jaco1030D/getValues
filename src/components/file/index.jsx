@@ -5,6 +5,7 @@ const File = ({file, inputsValue, valueWord, languages}) => {
     const {getNumWordsPDF, getNumWordsDOCX, calculateValues, getExtension } = useCalculateValue()
     const [numWords, setNumWords] = useState('Calculando...')
     const [value, setValue] = useState([])
+    const [numPages, setNumPages] = useState(0)
     const extension = getExtension(file)
     
     // if (extension === "pdf") {
@@ -37,9 +38,10 @@ const File = ({file, inputsValue, valueWord, languages}) => {
       if (extension === "pdf") {
         getNumWordsPDF(file)
           .then((res) => {
-            setNumWords(res);
-            const value = calculateValues(res, inputsValue, valueWord, languages);
+            setNumWords(res.numWords);
+            const value = calculateValues(res.numWords, inputsValue, valueWord, languages);
             setValue(value);
+            setNumPages(res.numPages)
           })
           .catch((err) => {
             setNumWords(0);
@@ -47,9 +49,10 @@ const File = ({file, inputsValue, valueWord, languages}) => {
       } else {
         getNumWordsDOCX(file)
           .then((res) => {
-            setNumWords(res);
-            const value = calculateValues(res, inputsValue, valueWord, languages);
+            setNumWords(res.numWords);
+            const value = calculateValues(res.numWords, inputsValue, valueWord, languages);
             setValue(value);
+            setNumPages(res.numPages)
           })
           .catch((err) => {
             setNumWords(0);
@@ -71,6 +74,7 @@ const File = ({file, inputsValue, valueWord, languages}) => {
       </td>
       <td>{extension}</td>
       <td>{numWords}</td>
+      <td>{numPages}</td>
       <td>{item}</td>
       <td>R${value[index]}</td>
       </tr>
