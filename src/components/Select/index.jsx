@@ -8,7 +8,7 @@ const Item = ({ name, handleClick, id, oneElement, language, openItem, isSelecte
       <span className="checkbox">
         <i className="fa-solid fa-check check-icon"></i>
       </span>
-      <span className="item-text">{name.length > 6 ? `${name.slice(0, 6)}...` : name}</span>
+      <span className="item-text">{name}</span>
     </li>
   );
 };
@@ -64,17 +64,17 @@ const SelectInput = ({ languages, update, name, values, id, title, oneElement = 
   return (
     <div className="select-input" ref={selectRef}>
       <div className={`select select-btn ${openFirst && 'open'}`} onClick={handleClick}>
-        <span className="btn-text">{selectedItem || title}</span>
+        <span className="btn-text">{title} {selectedItem || ''}</span>
       </div>
       <ul className="list-items" id={id}>
         {languages.map((item, index) => (
           <Item
             key={index}
-            name={item.label}
+            name={item}
             id={id}
             oneElement={oneElement}
             language={item.value}
-            isSelected={selectedItem === item.label}
+            isSelected={selectedItem === item}
             handleItemClick={handleItemClick}
           />
         ))}

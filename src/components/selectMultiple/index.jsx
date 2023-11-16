@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const Item = ({name, handleClick, id, oneElement, language, openItem}) => {
+const Item = ({name, handleClick, id, oneElement, language, openItem, languageOrigin}) => {
   const [isChecked, setIsChecked] = useState(openItem);
   const liRef = useRef(null)
 
@@ -13,14 +13,18 @@ const Item = ({name, handleClick, id, oneElement, language, openItem}) => {
   useEffect(() => {
 
     handleClick()
-
   },[isChecked])
+
+  if (name == languageOrigin) {
+    return null;
+  }
+
   return (
     <li ref={liRef} className={`item ${isChecked ? 'checked' : ''}`} id={name} onClick={handleItemClick} >
         <span className="checkbox">
             <i className="fa-solid fa-check check-icon"></i>
         </span>
-        <span className="item-text">{name.length > 6 ? `${name.slice(0, 6)}...` : name}</span>
+        <span className="item-text">{name}</span>
     </li>
   )
 }
@@ -59,7 +63,7 @@ const SelectInputMultiple = ({languages, update, name, values, id, title, oneEle
 
         const newLayout = itens.slice(0, 3)
 
-        setLanguages(`${newLayout.join(", ")}...`)
+        setLanguages(`${newLayout.join(", ")} +${elements.length - 3}`)
 
       } else {
   
@@ -99,11 +103,11 @@ const SelectInputMultiple = ({languages, update, name, values, id, title, oneEle
   return (
     <div className="select-input" ref={selectRef}>
         <div  className={`select select-btn ${openFirst && 'open'}`} onClick={handleClick}>
-            <span className="btn-text">{languagens || title}</span>
+            <span className="btn-text">{title} {languagens || ''}</span>
         </div>
         <ul className="list-items" id={id}>
             {languages.map((item, index) => (
-                <Item key={index} name={item.label} id={id} oneElement={oneElement} handleClick={handleGetValue} openItem={false} />
+                <Item key={index} name={item} id={id} languageOrigin={values} oneElement={oneElement} handleClick={handleGetValue} openItem={false} />
                 
             ))}
         </ul>

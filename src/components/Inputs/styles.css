@@ -8,3 +8,6 @@
     height: 50px;
     border-radius: 15px;
 }
+.open{
+    opacity: 0.5;
+}

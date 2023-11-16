@@ -33,7 +33,8 @@ export const useCalculateValue = () => {
                   fullText += content.items.map((s) => s.str).join(' ');
 
                 }
-        
+                
+                console.log(fullText);
                 resolve({fullText, numPages});
 
               } catch (error) {
@@ -65,7 +66,6 @@ export const useCalculateValue = () => {
           try {
             const zip = new PizZip(e.target.result);
             const xml = str2xml(zip.files["word/document.xml"].asText());
-            console.log(xml);
             const numPages = xml.getElementsByTagName('w:lastRenderedPageBreak').length + 1;
 
             // console.log(`Número de páginas: ${numeroPaginas}`);
@@ -112,9 +112,11 @@ export const useCalculateValue = () => {
 
     const getCountWord = (text) => {
 
-        let countWords = text.trim().split(/\s+/).length
+      const textWithoutPunctuation = text.replace(/[^a-zA-Z ]/g, "");
 
-        return countWords
+      let countWords = textWithoutPunctuation.trim().split(/\s+/).length;
+
+      return countWords
 
     }    
 
@@ -128,8 +130,6 @@ export const useCalculateValue = () => {
     const getNumWordsPDF = async (FilePDF) => {
       const {fullText, numPages} = await getTextFromPDF(FilePDF)
 
-      console.log(numPages);
-
       const numWords = await getCountWord(fullText)
 
       return {numWords, numPages}
@@ -142,16 +142,29 @@ export const useCalculateValue = () => {
       const originLanguage = infos.origin
 
       languagesTarget.forEach(element => {
-        const language = languages.filter(value => value.label === element)
-        const valueWord = language[0].value == 0 ? valueWords : language[0].value
-        const valueTranslation = calculateValue(originLanguage, element, numWords, valueWord)
-        value.push(valueTranslation.toFixed(2))
-      });
 
+        const valueTranslation = getValueTranslation(originLanguage, element, languages, valueWords)
+
+        const teste = calculateValue(numWords, valueTranslation)
+
+        value.push(teste.toFixed(2))
+      
+      });
+      
       return value
     }
 
-    const calculateValue = (origin, translation, numWords, valueWord) => {
+    const getValueTranslation = (origin, translated, languagesArray, value) => {
+      for (const subArray of languagesArray) {
+        for (const obj of subArray) {
+          if (obj.origin === origin && obj.translated === translated) {
+            return obj.value || value;
+          }
+        }
+      }
+    }
+
+    const calculateValue = (numWords, valueWord) => {
       return numWords * valueWord
     }
 
@@ -165,7 +178,9 @@ export const useCalculateValue = () => {
 
       const extension = fileNameParts[fileNameParts.length - 1]
 
-      return extension
+      const nameWithout = fileNameParts[0]
+
+      return {nameWithout, extension}
     }
     return {
         getCountWord,

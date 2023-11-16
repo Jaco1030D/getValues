@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Modal from '@mui/material/Modal';
-// import Button from '@mui/material/Button';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
 import './style.css';
 import LanguageValue from '../languageValue';
 import { ThemeProvider, createTheme } from '@mui/material';
@@ -17,8 +19,14 @@ const theme = createTheme({
     },
   });
 
-const Values = ({value, setValue, languages, setLanguages}) => {
+const Values = ({value, setValue, languages, setLanguages, languageCombinations, setLanguageCombinations}) => {
     const [oneValue, setOneValue] = useState(true)
+
+    const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const handleAccordionChange = (index) => {
+    setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
 
     const [open, setOpen] = useState(false);
 
@@ -32,7 +40,7 @@ const Values = ({value, setValue, languages, setLanguages}) => {
 
         {oneValue ? (
             <>
-            <div className='value-per-word'>
+            <div className='value-per-word-default'>
                 <p>Valor padrão por palavras:</p>
                 <input type="number" value={value} onChange={(e) => setValue(e.target.value)} />
             </div>
@@ -43,10 +51,19 @@ const Values = ({value, setValue, languages, setLanguages}) => {
             >
                 <div className='modal'>
                     <div className="languages">
-                    {languages && languages.map((language, index) => (
-                        <LanguageValue value={language.value} setValue={setLanguages} index={index} label={language.label} />
-                    ))}
-                    </div>
+                        {languageCombinations.map((languagesGroups, index) => (
+                          <div key={index}>
+                            <Accordion expanded={expandedIndex === index} onChange={() => handleAccordionChange(index)}>
+                              <AccordionSummary>
+                                <p>{languagesGroups[0].origin}</p>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                {expandedIndex === index ? <LanguageValue languagesGroups={languagesGroups} indexGroup={index} setValue={setLanguageCombinations} /> : null}
+                              </AccordionDetails>
+                            </Accordion>
+                          </div>
+                        ))}
+                      </div>
                     <div className='container-button'>
                         <Button text={'Salvar alterações e fechar'} handleClick={handleClose} />
                     </div>

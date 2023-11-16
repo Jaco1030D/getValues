@@ -6,7 +6,7 @@ const File = ({file, inputsValue, valueWord, languages}) => {
     const [numWords, setNumWords] = useState('Calculando...')
     const [value, setValue] = useState([])
     const [numPages, setNumPages] = useState(0)
-    const extension = getExtension(file)
+    const {nameWithout, extension} = getExtension(file)
     
     // if (extension === "pdf") {
     //   getNumWordsPDF(file).then(res => {
@@ -69,7 +69,7 @@ const File = ({file, inputsValue, valueWord, languages}) => {
       <tr key={index}> 
       <td>
         <p>
-        {file.name}
+        {nameWithout}
         </p>
       </td>
       <td>{extension}</td>

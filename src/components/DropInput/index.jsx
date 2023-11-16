@@ -6,7 +6,6 @@ const DropIntput = ({files, setFiles, inputsValue}) => {
     const [numArchives, setNumArchives] = useState(0)
     const [messageError, setMessageError] = useState()
     const input = useRef()
-    console.log(files);
     const handleFileChange = (e) => {
         const count = e.target.files.length;
         const files = e.target.files

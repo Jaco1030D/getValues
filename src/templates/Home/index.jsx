@@ -32,11 +32,33 @@ const languagesOrigin = [
   { value: 0, label: "Dinamarquês"}
 ]
 
+const createLanguageCombination = (languages) => {
+  const languageCombinations = [];
+
+  for (let i = 0; i < languages.length; i++) {
+      const languagePerType = []
+      for (let j = 0; j < languages.length; j++) {
+          if (i !== j) {
+              languagePerType.push({
+              origin: languages[i],
+              translated: languages[j],
+              value: 0,
+              });
+          }
+      }
+      languageCombinations.push(languagePerType)
+      
+  }
+
+  return languageCombinations;
+}
+
 function Home() {
   const [files, setFiles] = useState({})
   const [inputsValue, setInputsValue] = useState(languagesValue)
   const [valueWord, setValueWord] = useState(0.11)
-  const [languages, setLanguages] = useState(languagesOrigin)
+  const [languages, setLanguages] = useState(languagesOrigin.map(language => language.label))
+  const [languageCombinations, setLanguageCombinations] = useState(createLanguageCombination(languages))
 
   const updateFieldHandler = (key, value) => {
     setInputsValue((prev) => {
@@ -49,12 +71,23 @@ function Home() {
       return prevValues.map((value, i) => (i === index ? { ...value, value: newValue } : value));
     });
   };
+
+  const modifyValue = (indexElement, indexGroup, value) => {
+    setLanguageCombinations(prev => {
+      const newArray = [...prev]
+
+      newArray[indexGroup][indexElement].value = value
+
+      return newArray
+    })
+  }
+
   return (
     <div className="App">
         <DropIntput files={files} setFiles={setFiles} inputsValue={inputsValue} />
         <Inputs languages={languages} update={updateFieldHandler} inputsValue={inputsValue} />
-        <Values languages={languages} setLanguages={updateValueByIndex} value={valueWord} setValue={setValueWord} />
-        {files.length > 0 && inputsValue.origin.length > 0 && inputsValue.translation.length > 0 && <Table languages={languages} files={files} value={valueWord} inputsValue={inputsValue} />}
+        <Values languages={languages} setLanguages={updateValueByIndex} languageCombinations={languageCombinations} setLanguageCombinations={modifyValue} value={valueWord} setValue={setValueWord} />
+        {files.length > 0 && inputsValue.origin.length > 0 && inputsValue.translation.length > 0 && <Table languages={languageCombinations} files={files} value={valueWord} inputsValue={inputsValue} />}
     </div>
   );
 }
