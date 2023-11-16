@@ -131,9 +131,9 @@ export const useCalculateValue = () => {
 
         const valueTranslation = getValueTranslation(originLanguage, element, languages, valueWords)
 
-        const teste = calculateValue(numWords, valueTranslation)
+        const valueFinally = calculateValue(numWords, valueTranslation)
 
-        value.push(teste.toFixed(2))
+        value.push(Math.round(valueFinally))
       
       });
       
