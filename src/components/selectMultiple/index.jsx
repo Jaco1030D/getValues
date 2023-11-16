@@ -63,8 +63,6 @@ const SelectInputMultiple = ({languages, update, name, values, id, title, oneEle
 
       });
 
-      update(name, itens)
-
       const navigator = detectMobile()
 
       let x = 3
@@ -77,6 +75,8 @@ const SelectInputMultiple = ({languages, update, name, values, id, title, oneEle
           }
         });
       }
+
+      update(name, itens)
 
       if (elements.length > x) {
 
