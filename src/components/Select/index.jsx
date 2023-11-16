@@ -22,22 +22,6 @@ const SelectInput = ({ languages, update, name, values, id, title, oneElement = 
     setOpenFirst((prev) => !prev);
   };
 
-  // const handleGetValue = (language = '') => {
-  //   if (!language) {
-  //     const checkedItem = selectedItem ? [selectedItem] : [];
-  //     update(name, checkedItem);
-
-  //     const newLayout = checkedItem.length > 3 ? checkedItem.slice(0, 3) : checkedItem;
-  //     setLanguages(`${newLayout.join(', ')}...`);
-  //   } else {
-  //     update(name, language);
-  //   }
-
-  //   if (oneElement) {
-  //     setOpenFirst(false);
-  //   }
-  // };
-
   const handleItemClick = (clickedItem) => {
     setSelectedItem(clickedItem === selectedItem ? null : clickedItem);
     update(name, clickedItem)

@@ -68,20 +68,6 @@ export const useCalculateValue = () => {
             const xml = str2xml(zip.files["word/document.xml"].asText());
             const numPages = xml.getElementsByTagName('w:lastRenderedPageBreak').length + 1;
 
-            // console.log(`Número de páginas: ${numeroPaginas}`);
-            // var filename = "file.xml";
-            // var pom = document.createElement('a');
-            // var bb = new Blob([xml], {type: 'text/plain'});
-
-            // pom.setAttribute('href', window.URL.createObjectURL(bb));
-            // pom.setAttribute('download', filename);
-
-            // pom.dataset.downloadurl = ['text/plain', pom.download, pom.href].join(':');
-            // pom.draggable = true; 
-            // pom.classList.add('dragout');
-
-            // pom.click();
-
             const paragraphsXml = xml.getElementsByTagName("w:p");
             const paragraphs = [];
             for (let i = 0, len = paragraphsXml.length; i < len; i++) {
@@ -168,9 +154,6 @@ export const useCalculateValue = () => {
       return numWords * valueWord
     }
 
-    const getNumWordsFile = (file) => {
-
-    }
     const getExtension = (file) => {
       const name = file.name
 

@@ -7,33 +7,7 @@ const File = ({file, inputsValue, valueWord, languages}) => {
     const [value, setValue] = useState([])
     const [numPages, setNumPages] = useState(0)
     const {nameWithout, extension} = getExtension(file)
-    
-    // if (extension === "pdf") {
-    //   getNumWordsPDF(file).then(res => {
-      
-    //     setNumWords(res)
-      
-    //     const valuePDF = calculateValue(res)
-
-    //     setValue(valuePDF)
-
-    //   }).catch(err => {
-        
-    //     setNumWords(0)
-    //   })
-    // } else {
-    //   getNumWordsDOCX(file).then(res => {
-
-    //     setNumWords(res)
-      
-    //     const valueDOCX = calculateValue(res)
-
-    //     setValue(valueDOCX)
-
-    //   }).catch(err => {
-    //     setNumWords(0)
-    //   })
-    // }
+  
     useEffect(() => {
       if (extension === "pdf") {
         getNumWordsPDF(file)
@@ -59,10 +33,6 @@ const File = ({file, inputsValue, valueWord, languages}) => {
           });
       }
     }, [file, extension, inputsValue, valueWord, languages]);
-    // useEffect(() => {
-    //   const value = calculateValue(numWords, inputsValue)
-    //   setValue(value)
-    // },[])
   return (
     <>
     {inputsValue.translation && inputsValue.translation.map((item, index) => (

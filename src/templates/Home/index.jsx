@@ -9,6 +9,7 @@ const languagesValue = {
   origin: '',
   translation: ''
 }
+
 const languagesOrigin = [
   { value: 0, label: "Português" },
   { value: 0, label: "Inglês" },

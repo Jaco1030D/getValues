@@ -108,7 +108,6 @@ const SelectInputMultiple = ({languages, update, name, values, id, title, oneEle
         <ul className="list-items" id={id}>
             {languages.map((item, index) => (
                 <Item key={index} name={item} id={id} languageOrigin={values} oneElement={oneElement} handleClick={handleGetValue} openItem={false} />
-                
             ))}
         </ul>
     </div>  
