@@ -29,7 +29,7 @@ body {
 }
 @media only screen and (max-width: 500px) {
     .table, .input.file, .inputs-select, .list-items, .value-box {
-        width: 300px;
+        width: 330px;
     }
     .value-per-word {
         flex-direction: column;
