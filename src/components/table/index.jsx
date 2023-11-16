@@ -10,7 +10,7 @@ const Table = ({ files, inputsValue, value, languages }) => {
             <th>Nome</th>
             <th>Tipo</th>
             <th>Palavras</th>
-            <th>Paginas</th>
+            <th>Pag</th>
             <th>Destino</th>
             <th>valor</th>
         </tr>
